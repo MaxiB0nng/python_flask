@@ -12,15 +12,9 @@ def home():
     txt = "M.O.W."
     return render_template('index.html', title=txt)
 
-
-if __name__ == '__main__':
-    app.debug = True
-    #app.run(debug=True) #Koer kun paa localhost
-    app.run(host='0.0.0.0', port=5000)
-
-
 @app.route('/q1/', methods=['POST', 'GET'])
 def q1():
+    txt = "spørgsmål 1"
     q1_form = Q1_Form()
     if q1_form.validate_on_submit():
         if q1_form.valg.data:
@@ -39,4 +33,11 @@ def q1():
 
             """
             return redirect('/')
-    return render_template('q1.html', q1_form = q1_form)
+    return render_template('q1.html', q1_form = q1_form, title=txt)
+
+
+
+if __name__ == '__main__':
+    app.debug = True
+    #app.run(debug=True) #Koer kun paa localhost
+    app.run(host='0.0.0.0', port=5000)
