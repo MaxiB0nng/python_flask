@@ -6,6 +6,29 @@ db = 'database.db'
 app = Flask(__name__)
 app.config.from_object(Config)
 
+
+def setup_database():
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        CREATE TABLE IF NOT EXISTS questions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            yes_votes INTEGER DEFAULT 0,
+            no_votes INTEGER DEFAULT 0,
+            voters TEXT DEFAULT '{}',
+            title TEXT,
+            date TEXT DEFAULT CURRENT_TIMESTAMP
+        )
+        """
+    )
+    conn.commit()
+    conn.close()
+
+setup_database
+
+
+
 @app.route('/')
 def home():
     # Her kan fx hentes data og sættes ind i html-koden
@@ -34,6 +57,7 @@ def q1():
             """
             return redirect('/')
     return render_template('q1.html', q1_form = q1_form, title=txt)
+
 
 
 
