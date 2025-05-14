@@ -7,7 +7,7 @@ class Q1_Form(FlaskForm):
     submit = SubmitField('svar')
 
 class Q2_Form(FlaskForm):
-    pizza = StringField('pizza')
+    valg = StringField('valg', validators=[DataRequired()])
     submit = SubmitField('svar')
 
 class Q3_Form(FlaskForm):

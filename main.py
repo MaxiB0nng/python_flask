@@ -7,32 +7,10 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 
-def setup_database():
-    conn = sqlite3.connect("database.db")
-    cursor = conn.cursor()
-    cursor.execute(
-        """
-        CREATE TABLE IF NOT EXISTS questions (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            yes_votes INTEGER DEFAULT 0,
-            no_votes INTEGER DEFAULT 0,
-            voters TEXT DEFAULT '{}',
-            title TEXT,
-            date TEXT DEFAULT CURRENT_TIMESTAMP
-        )
-        """
-    )
-    conn.commit()
-    conn.close()
-
-setup_database
-
-
-
 @app.route('/')
 def home():
     # Her kan fx hentes data og sættes ind i html-koden
-    txt = "M.O.W."
+    txt = "spørgsmåls hjemmeside"
     return render_template('index.html', title=txt)
 
 @app.route('/q1/', methods=['POST', 'GET'])
@@ -58,7 +36,28 @@ def q1():
             return redirect('/')
     return render_template('q1.html', q1_form = q1_form, title=txt)
 
+@app.route('/q2/', methods=['POST', 'GET'])
+def q2():
+    txt = "spørgsmål 2"
+    q2_form = Q2_Form()
+    if q2_form.validate_on_submit():
+        if q2_form.valg.data:
+            conn = sqlite3.connect(db)
+            cursor = conn.cursor()
+            valg = q2_form.valg.data
+            print(valg)
+            cursor.execute('INSERT INTO driver(result_2) VALUES ('+valg+')')
+            conn.commit()
+            conn.close()
+            """
+            Ekstra-opgave:
+            En måde at sikre sig at brugeren ikke kan stemme to
+            gange, er ved at sætte en cookie her v.hj.a.javascript.
+            https://www.w3schools.com/js/js_cookies.asp
 
+            """
+            return redirect('/')
+    return render_template('q2.html', q2_form = q2_form, title=txt)
 
 
 if __name__ == '__main__':
