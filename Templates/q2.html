@@ -7,14 +7,27 @@
 </head>
 <body>
     <h1>{{title}}</h1>
-    <form method="post" action="/q2/">
-        {{ q2_form.hidden_tag() }}
+   <h2>Hvad køber du oftest i kantinen?</h2>
 
-        <input type="radio" id="ja" name="valg" value= 1>
-        <label for="ja">Ja</label><br>
-        <input type="radio" id="nej" name="valg" value= 0>
-        <label for="nej">Nej</label><br><br>
-        <input type="submit" name="svar" value="Svar">
-    </form>
+   <form method="post" action="/q2/">
+    <label for="Dagens_ret">Dagens_ret</label>
+    <input type="checkbox" id="Dagens_ret" name="checkboxes" value="Dagens_ret"><br>
+
+    <label for="Sandwich">Sandwich</label>
+    <input type="checkbox" id="Sandwich" name="checkboxes" value="Sandwich"><br>
+
+    <label for="Pizza">Pizza</label>
+    <input type="checkbox" is="Pizza" name="checkboxes" value="Pizza"><br>
+
+    <label for="Pølsehorn">Pølsehorn</label>
+    <input type="checkbox" id="Pølsehorn" name="checkboxes" value="Pølsehorn"><br>
+
+    <label for="Kage">Kage</label>
+    <input type="checkbox" id="Kage" name="checkboxes" value="Kage"><br>
+
+    <label for="Sodavand">Sodavand</label>
+    <input type="checkbox" id="Sodavand" name="checkboxes" value="Sodavand"><br>
+   </form>
+
 </body>
 </html>

@@ -31,6 +31,24 @@ def q1():
         return redirect('/q1/')
     return render_template('q1.html', title="Spørgsmål 1")
 
+@app.route('/q2/', methods= ['GET', 'POST'])
+def q2():
+    if request.method == 'POST':
+        selected = request.form.getlist('checkboxes')
+        svar_text = ', '.join(selected)
+
+
+        conn = sqlite3.connect(db)
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO q2_responses (svar) VALUES (?)", (svar_text,))
+        conn.commit()
+        conn.close()
+
+        print("Indsendt svar:", svar_text)
+        return redirect ('/q2/')
+    return render_template('q2.html', title="Spørgsmål 2")
+
+
 def setup_database():
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
