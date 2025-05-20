@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hvad er det bedste ved HTX?</title>
+    <link rel= "stylesheet" type= "text/css" href= "../static/css/style.css">
+</head>
+<body>
+    <h1>Hvad er det bedste ved HTX?</h1><br>
+    <form method="post" action="/q4/">
+        {{ q4_form.hidden_tag() }}
+        <label for="Gruppearbejde">Gruppearbejde</label><br>
+        <input type="checkbox" id="Gruppearbejde" name="checkbox" value="Gruppearbejde"><br><br>
+        <label for="Projektarbejde">Projektarbejde</label><br>
+        <input type="checkbox" id="Projektarbejde" name="checkbox" value="Projektarbejde"><br><br>
+        <label for="Teknologi">Teknologi</label><br>
+        <input type="checkbox" id="Teknologi" name="checkbox" value="Teknologi"><br><br>
+        <label for="Matematik">Matematik</label><br>
+        <input type="checkbox" id="Matematik" name="checkbox" value="Matematik"><br><br>
+        <label for="Kommentarer">Kommentarer</label><br>
+        <textarea name="Kommentarer" id="Kommentarer" rows="10" cols="50"></textarea><br><br>
+        <input type="submit" name="svar" value="Svar">
+    </form>
+	
+</body>
+</html>

@@ -13,28 +13,15 @@ def home():
     txt = "spørgsmåls hjemmeside"
     return render_template('index.html', title=txt)
 
+
 @app.route('/q1/', methods=['POST', 'GET'])
 def q1():
-    txt = "spørgsmål 1"
     q1_form = Q1_Form()
     if q1_form.validate_on_submit():
-        if q1_form.valg.data:
-            conn = sqlite3.connect(db)
-            cursor = conn.cursor()
-            valg = q1_form.valg.data
-            print(valg)
-            cursor.execute('INSERT INTO driver(result) VALUES ('+valg+')')
-            conn.commit()
-            conn.close()
-            """
-            Ekstra-opgave:
-            En måde at sikre sig at brugeren ikke kan stemme to
-            gange, er ved at sætte en cookie her v.hj.a.javascript.
-            https://www.w3schools.com/js/js_cookies.asp
-
-            """
-            return redirect('/')
-    return render_template('q1.html', q1_form = q1_form, title=txt)
+        selected_options = request.form.getlist('checkbox')
+        print(f'Selected options: {", ".join(selected_options)}')
+        return redirect('/q2/')
+    return render_template('q1.html', q1_form = q1_form)
 
 @app.route('/q2/', methods=['POST', 'GET'])
 def q2():
@@ -56,7 +43,7 @@ def q2():
             https://www.w3schools.com/js/js_cookies.asp
 
             """
-            return redirect('/')
+            return redirect('/q3/')
     return render_template('q2.html', q2_form = q2_form, title=txt)
 
 
