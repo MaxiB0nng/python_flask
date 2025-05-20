@@ -29,7 +29,7 @@ def q1():
         conn.close()
 
         print("Indsendt svar:", svar_text)
-        return redirect('/')
+        return redirect('/q2/')
     return render_template('q1.html', title="Spørgsmål 1")
 
 
@@ -47,7 +47,7 @@ def q2():
         conn.close()
 
         print("Indsendt svar:", svar_text)
-        return redirect ('/')
+        return redirect ('/q3/')
     return render_template('q2.html', title="Spørgsmål 2")
 
 @app.route('/q3/', methods= ['GET', 'POST'])
@@ -64,7 +64,7 @@ def q3():
         conn.close()
 
         print("Indsendt svar:", svar_text)
-        return redirect ('/')
+        return redirect ('/q4/')
     return render_template('q3.html', title="Spørgsmål 3")
 
 @app.route('/q4/', methods= ['GET', 'POST'])
@@ -87,37 +87,77 @@ def q4():
 
 
 
-
-
 @app.route('/results/', methods=['GET', 'POST'])
 def results():
     conn = sqlite3.connect(db)
     cursor = conn.cursor()
 
-    # Fetch count of each unique text response
+    # --- Q1 ---
+    labels_q1 = ["Billigt", "Acceptabelt", "Dyrt"]
     cursor.execute("SELECT svar, COUNT(*) FROM q1_responses GROUP BY svar")
-    rows = cursor.fetchall()
+    rows_q1 = cursor.fetchall()
+    dict_q1 = {label: 0 for label in labels_q1}
+    for row in rows_q1:
+        if row[0] is None:
+            continue
+        for val in row[0].split(", "):  # Handle multiple selections
+            if val in dict_q1:
+                dict_q1[val] += row[1]
+    data_q1 = [dict_q1[label] for label in labels_q1]
+
+    # --- Q2 ---
+    labels_q2 = ["Dagens ret", "Sandwich", "Pizza", "pølsehorn", "Kage", "Sodavand"]
+    cursor.execute("SELECT svar_2, COUNT(*) FROM q2_responses GROUP BY svar_2")
+    rows_q2 = cursor.fetchall()
+    dict_q2 = {label: 0 for label in labels_q2}
+    for row in rows_q2:
+        if row[0] is None:
+            continue
+        for val in row[0].split(", "):
+            if val in dict_q2:
+                dict_q2[val] += row[1]
+    data_q2 = [dict_q2[label] for label in labels_q2]
+
+    # --- Q3 ---
+    labels_q3 = ["Det er nemt og hurtigt.", "God stemning"]
+    cursor.execute("SELECT svar_3, COUNT(*) FROM q3_responses GROUP BY svar_3")
+    rows_q3 = cursor.fetchall()
+    dict_q3 = {label: 0 for label in labels_q3}
+    for row in rows_q3:
+        if row[0] is None:
+            continue
+        for val in row[0].split(", "):
+            if val in dict_q3:
+                dict_q3[val] += row[1]
+    data_q3 = [dict_q3[label] for label in labels_q3]
+
+    # --- Q4 ---
+    labels_q4 = [
+        "Der er for få fritidsaktiviteter",
+        "Passende mængde aktiviteter",
+        "Der er for mange aktiviteter"
+    ]
+    cursor.execute("SELECT svar_4, COUNT(*) FROM q4_responses GROUP BY svar_4")
+    rows_q4 = cursor.fetchall()
+    dict_q4 = {label: 0 for label in labels_q4}
+    for row in rows_q4:
+        if row[0] is None:
+            continue
+        for val in row[0].split(", "):
+            if val in dict_q4:
+                dict_q4[val] += row[1]
+    data_q4 = [dict_q4[label] for label in labels_q4]
+
     conn.close()
 
-    # Ensure consistent order: Billigt, Acceptabelt, Dyrt
-    labels = ["Billigt", "Acceptabelt", "Dyrt"]
-    data_dict = dict(rows)
-    counts = [data_dict.get(label, 0) for label in labels]
+    return render_template(
+        'results.html',
+        labels_q1=json.dumps(labels_q1), data_q1=json.dumps(data_q1),
+        labels_q2=json.dumps(labels_q2), data_q2=json.dumps(data_q2),
+        labels_q3=json.dumps(labels_q3), data_q3=json.dumps(data_q3),
+        labels_q4=json.dumps(labels_q4), data_q4=json.dumps(data_q4)
+    )
 
-    return render_template('results.html',data_1=json.dumps(counts))
-
-def setup_database():
-    conn = sqlite3.connect("database.db")
-    cursor = conn.cursor()
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS q2_responses (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    svar_2 TEXT
-    );
-
-    ''')
-    conn.commit()
-    conn.close()
 
 
 if __name__ == '__main__':

@@ -7,34 +7,52 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 <body>
-    <h1>Resultater</h1><br>
-        
-    <a href="/">forside</a><br>   
-   
-<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+<h1>Resultater</h1>
 
+<h2>Spørgsmål 1</h2>
+<canvas id="chart1" style="max-width: 600px; height: 300px"></canvas>
+
+<h2>Spørgsmål 2</h2>
+<canvas id="chart2" style="max-width: 600px; height: 300px"></canvas>
+
+<h2>Spørgsmål 3</h2>
+<canvas id="chart3" style="max-width: 600px; height: 300px"></canvas>
+
+<h2>Spørgsmål 4</h2>
+<canvas id="chart4" style="max-width: 600px; height: 300px"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-var xValues = ["Billigt", "Acceptabelt", "Dyrt"];
-var yValues = {{data_1}};
-var barColors = ["#022859", "#8B2A8C", "#024873"];
+function drawChart(id, labels, data) {
+    new Chart(document.getElementById(id), {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: [
+                    "#022859", "#8B2A8C", "#024873",
+                    "#537188", "#D0BFFF", "#C70039"
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: id
+            }
+        }
+    });
+}
 
-new Chart("myChart", {
-  type: "pie",
-  data: {
-    labels: xValues,
-    datasets: [{
-      backgroundColor: barColors,
-      data: yValues
-    }]
-  },
-  options: {
-    title: {
-      display: true,
-      text: "Hvad synes du om kantinens priser?"
-    }
-  }
-});
+
+drawChart("chart1", ["Billigt", "Acceptabelt", "Dyrt"], {{ data_q1 }});
+drawChart("chart2", ["Dagens ret", "Sandwich", "Pizza", "pølsehorn", "Kage", "Sodavand"], {{ data_q2 }});
+drawChart("chart3", ["Det er nemt og hurtigt.", "God stemning"], {{ data_q3 }});
+drawChart("chart4", ["Der er for få fritidsaktiviteter", "Passende mængde aktiviteter", "Der er for mange aktiviteter"], {{ data_q4 }});
 </script>
+
 
 
 </body>
