@@ -1,0 +1,41 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Resultater</title>
+    <link rel= "stylesheet" type= "text/css" href= "../static/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+<body>
+    <h1>Resultater</h1><br>
+        
+    <a href="/">forside</a><br>   
+   
+<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+<script>
+var xValues = ["Billigt", "Acceptabelt", "Dyrt"];
+var yValues = {{data_1}};
+var barColors = ["#022859", "#8B2A8C", "#024873"];
+
+new Chart("myChart", {
+  type: "pie",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "Hvad synes du om kantinens priser?"
+    }
+  }
+});
+</script>
+
+
+</body>
+</html>
