@@ -14,37 +14,35 @@ def home():
     return render_template('index.html', title=txt)
 
 
-@app.route('/q1/', methods=['POST', 'GET'])
+@app.route('/q1/', methods=['GET', 'POST'])
 def q1():
-    q1_form = Q1_Form()
-    if q1_form.validate_on_submit():
-        selected_options = request.form.getlist('checkbox')
-        print(f'Selected options: {", ".join(selected_options)}')
-        return redirect('/q2/')
-    return render_template('q1.html', q1_form = q1_form)
+    if request.method == 'POST':
+        selected = request.form.getlist('checkboxes')  # Get selected values as a list
+        svar_text = ', '.join(selected)  # Convert list to comma-separated string
 
-@app.route('/q2/', methods=['POST', 'GET'])
-def q2():
-    txt = "spørgsmål 2"
-    q2_form = Q2_Form()
-    if q2_form.validate_on_submit():
-        if q2_form.valg.data:
-            conn = sqlite3.connect(db)
-            cursor = conn.cursor()
-            valg = q2_form.valg.data
-            print(valg)
-            cursor.execute('INSERT INTO driver(result_2) VALUES ('+valg+')')
-            conn.commit()
-            conn.close()
-            """
-            Ekstra-opgave:
-            En måde at sikre sig at brugeren ikke kan stemme to
-            gange, er ved at sætte en cookie her v.hj.a.javascript.
-            https://www.w3schools.com/js/js_cookies.asp
+        # Save to database
+        conn = sqlite3.connect(db)
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO q1_responses (svar) VALUES (?)", (svar_text,))
+        conn.commit()
+        conn.close()
 
-            """
-            return redirect('/q3/')
-    return render_template('q2.html', q2_form = q2_form, title=txt)
+        print("Indsendt svar:", svar_text)
+        return redirect('/q1/')
+    return render_template('q1.html', title="Spørgsmål 1")
+
+def setup_database():
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS q1_responses (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    svar TEXT
+    );
+
+    ''')
+    conn.commit()
+    conn.close()
 
 
 if __name__ == '__main__':

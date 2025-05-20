@@ -8,19 +8,19 @@
 <body>
     <h1>{{title}}</h1>
     <h2>Hvad synes du om kantinens priser?</h2>
-    <form method="post" action="/q1/">
-        {{ q1_form.hidden_tag() }}
 
+    <form method="post" action="/q1/">
         <label for="Billigt">Billigt</label>
-        <input type="checkbox" id="Billigt" name="checkbox" value="Billigt"><br>
+        <input type="checkbox" id="Billigt" name="checkboxes" value="Billigt"><br>
 
         <label for="Acceptabelt">Acceptabelt</label>
-        <input type="checkbox" id="Acceptabelt" name="checkbox" value="Acceptabelt"><br>
+        <input type="checkbox" id="Acceptabelt" name="checkboxes" value="Acceptabelt"><br>
 
         <label for="Dyrt">Dyrt</label>
-        <input type="checkbox" id="Dyrt" name="checkbox" value="Dyrt"><br>
+        <input type="checkbox" id="Dyrt" name="checkboxes" value="Dyrt"><br>
 
-        <input type="submit" name="svar" value="Svar">
+        <input type="submit" value="Svar">
     </form>
+
 </body>
 </html>
