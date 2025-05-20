@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hvad er det bedste ved HTX?</title>
-    <link rel= "stylesheet" type= "text/css" href= "../static/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flask</title>
 </head>
 <body>
-    <h1>Hvad er det bedste ved HTX?</h1><br>
+    <h1>{{title}}</h1>
+    <h2>Hvad synes du om mængden af fritidsaktiviteter på HTX?</h2>
+
     <form method="post" action="/q4/">
-        {{ q4_form.hidden_tag() }}
-        <label for="Gruppearbejde">Gruppearbejde</label><br>
-        <input type="checkbox" id="Gruppearbejde" name="checkbox" value="Gruppearbejde"><br><br>
-        <label for="Projektarbejde">Projektarbejde</label><br>
-        <input type="checkbox" id="Projektarbejde" name="checkbox" value="Projektarbejde"><br><br>
-        <label for="Teknologi">Teknologi</label><br>
-        <input type="checkbox" id="Teknologi" name="checkbox" value="Teknologi"><br><br>
-        <label for="Matematik">Matematik</label><br>
-        <input type="checkbox" id="Matematik" name="checkbox" value="Matematik"><br><br>
-        <label for="Kommentarer">Kommentarer</label><br>
-        <textarea name="Kommentarer" id="Kommentarer" rows="10" cols="50"></textarea><br><br>
-        <input type="submit" name="svar" value="Svar">
+        <label for="Der_er_for_få_fritidsaktiviteter">Der er for få fritidsaktiviteter </label>
+        <input type="checkbox" id="Der_er_for_få_fritidsaktiviteter" name="checkboxes" value="Der_er_for_få_fritidsaktiviteter"><br>
+
+        <label for="Passende_mængde_aktiviteter">Passende mængde aktiviteter</label>
+        <input type="checkbox" id="Passende_mængde_aktiviteter" name="checkboxes" value="Passende_mængde_aktiviteter"><br>
+
+        <label for="Der_er_for_mange_aktiviteter">Der er for mange aktiviteter</label>
+        <input type="checkbox" id="Der_er_for_mange_aktiviteter" name="checkboxes" value="Der_er_for_mange_aktiviteter"><br>
+
+        <input type="submit" value="Svar">
     </form>
-	
+
 </body>
 </html>

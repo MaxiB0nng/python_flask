@@ -50,6 +50,42 @@ def q2():
         return redirect ('/')
     return render_template('q2.html', title="Spørgsmål 2")
 
+@app.route('/q3/', methods= ['GET', 'POST'])
+def q3():
+    if request.method == 'POST':
+        selected = request.form.getlist('checkboxes')
+        svar_text = ', '.join(selected)
+
+
+        conn = sqlite3.connect(db)
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO q3_responses (svar_3) VALUES (?)", (svar_text,))
+        conn.commit()
+        conn.close()
+
+        print("Indsendt svar:", svar_text)
+        return redirect ('/')
+    return render_template('q3.html', title="Spørgsmål 3")
+
+@app.route('/q4/', methods= ['GET', 'POST'])
+def q4():
+    if request.method == 'POST':
+        selected = request.form.getlist('checkboxes')
+        svar_text = ', '.join(selected)
+
+
+        conn = sqlite3.connect(db)
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO q4_responses (svar_4) VALUES (?)", (svar_text,))
+        conn.commit()
+        conn.close()
+
+        print("Indsendt svar:", svar_text)
+        return redirect ('/')
+    return render_template('q4.html', title="Spørgsmål 4")
+
+
+
 
 
 
