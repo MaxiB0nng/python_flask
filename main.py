@@ -148,6 +148,7 @@ def results():
                 dict_q4[val] += row[1]
     data_q4 = [dict_q4[label] for label in labels_q4]
 
+
     conn.close()
 
     return render_template(
@@ -157,7 +158,6 @@ def results():
         labels_q3=json.dumps(labels_q3), data_q3=json.dumps(data_q3),
         labels_q4=json.dumps(labels_q4), data_q4=json.dumps(data_q4)
     )
-
 
 
 if __name__ == '__main__':

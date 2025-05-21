@@ -9,19 +9,20 @@
 <body>
 <h1>Resultater</h1>
 
+    <a href="/">start</a><br>   
+
 <h2>Spørgsmål 1</h2>
-<canvas id="chart1" style="max-width: 600px; height: 300px"></canvas>
+<canvas id="chart1" style="max-width: 600px; height: 400px"></canvas>
 
 <h2>Spørgsmål 2</h2>
-<canvas id="chart2" style="max-width: 600px; height: 300px"></canvas>
+<canvas id="chart2" style="max-width: 600px; height: 400px"></canvas>
 
 <h2>Spørgsmål 3</h2>
-<canvas id="chart3" style="max-width: 600px; height: 300px"></canvas>
+<canvas id="chart3" style="max-width: 600px; height: 400px"></canvas>
 
 <h2>Spørgsmål 4</h2>
-<canvas id="chart4" style="max-width: 600px; height: 300px"></canvas>
+<canvas id="chart4" style="max-width: 600px; height: 400px"></canvas>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 function drawChart(id, labels, data) {
     new Chart(document.getElementById(id), {
@@ -38,20 +39,22 @@ function drawChart(id, labels, data) {
         },
         options: {
             responsive: true,
-            title: {
-                display: true,
-                text: id
+            plugins: {
+                title: {
+                    display: true,
+                    text: id
+                }
             }
         }
     });
 }
 
-
-drawChart("chart1", ["Billigt", "Acceptabelt", "Dyrt"], {{ data_q1 }});
-drawChart("chart2", ["Dagens ret", "Sandwich", "Pizza", "pølsehorn", "Kage", "Sodavand"], {{ data_q2 }});
-drawChart("chart3", ["Det er nemt og hurtigt.", "God stemning"], {{ data_q3 }});
-drawChart("chart4", ["Der er for få fritidsaktiviteter", "Passende mængde aktiviteter", "Der er for mange aktiviteter"], {{ data_q4 }});
+drawChart("chart1", ["Billigt", "Acceptabelt", "Dyrt"], {{ data_q1 | safe }});
+drawChart("chart2", ["Dagens ret", "Sandwich", "Pizza", "pølsehorn", "Kage", "Sodavand"], {{ data_q2 | safe }});
+drawChart("chart3", ["Det er nemt og hurtigt.", "God stemning"], {{ data_q3 | safe }});
+drawChart("chart4", ["Der er for få fritidsaktiviteter", "Passende mængde aktiviteter", "Der er for mange aktiviteter"], {{ data_q4 | safe }});
 </script>
+
 
 
 

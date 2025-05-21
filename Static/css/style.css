@@ -1,9 +1,8 @@
 canvas {
   display: block;          /* Make canvas a block element */
-  margin: 20px auto;       /* Center horizontally with vertical margin */
   max-width: 600px;        /* Max width */
   width: 100%;             /* Responsive width */
-  height: 300px;           /* Fixed height */
+  height: 400px;           /* Fixed height */
   border: 2px solid #022859;  /* Nice dark blue border */
   border-radius: 8px;      /* Rounded corners */
   background-color: #f0f4f8; /* Light background to make chart pop */
