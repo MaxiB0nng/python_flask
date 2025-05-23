@@ -1,3 +1,48 @@
+/* style.css */
+body {
+  background-color: #003366;
+  font-family: Arial, sans-serif;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  color: #0059b3;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: white;
+  font-size: 1.5em;
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+
+a {
+  color: #0066cc;
+  text-decoration: none;
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  padding: 10px 20px;
+  border: 2px solid #0066cc;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+a:hover {
+  background-color: #0066cc;
+  color: white;
+}
+
 canvas {
   display: block;          /* Make canvas a block element */
   max-width: 600px;        /* Max width */

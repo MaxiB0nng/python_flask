@@ -1,32 +1,38 @@
-/* index.css */
+/* style.css */
 
 body {
-    background-color: #003366; /* light blue background */
+    background-color: #003366;
     font-family: Arial, sans-serif;
     text-align: center;
-    /* Flexbox centering */
+
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
-    min-height: 80vh; /* Full height of the viewport */
+    min-height: 100vh;
     margin: 0;
-    text-align: center;
+    padding: 20px;
 }
 
 h1 {
-    color: #0059b3; /* blue heading */
+    color: #0059b3;
     font-size: 2.5em;
     margin-bottom: 20px;
 }
 
+h2 {
+    color: white;
+    font-size: 1.5em;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
 a {
-    color: #0066cc; /* link blue */
+    color: #0066cc;
     text-decoration: none;
     font-size: 1.2em;
-    display: inline-block;
-    margin: 10px;
+    margin-bottom: 30px;
     padding: 10px 20px;
     border: 2px solid #0066cc;
     border-radius: 8px;
@@ -36,4 +42,12 @@ a {
 a:hover {
     background-color: #0066cc;
     color: white;
+}
+
+canvas {
+    background-color: #e6f0ff;
+    border-radius: 12px;
+    padding: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
